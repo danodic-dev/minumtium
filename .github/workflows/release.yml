@@ -52,22 +52,26 @@ jobs:
           body_path: RELEASE.md
           draft: false
           prerelease: false
+      - name: Set python package name
+        run: echo "PACKAGE_FILENAME=./dist/minumtium-"$(echo $GITHUB_REF | cut -d'v' -f 2)".tar.gz" >> $GITHUB_ENV
       - name: Upload Python Package
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/minumtium-${{ github.ref }}.tar.gz
+          asset_path: ${{ PACKAGE_FILENAME }}
           asset_name: Python Package
           asset_content_type: application/gzip
+      - name: Set python wheel name
+        run: echo "WHEEL_FILENAME=./dist/minumtium-"$(echo $GITHUB_REF | cut -d'v' -f 2)"-py3-none-any.whl" >> $GITHUB_ENV
       - name: Upload Python Wheel
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/minumtium-${{ github.ref }}-py3-none-any.whl
+          asset_path: ${{ WHEEL_FILENAME }}
           asset_name: Python Wheel
           asset_content_type: application/x-wheel+zip
       - name: PyPI release
