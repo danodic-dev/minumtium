@@ -12,6 +12,7 @@ autopep8 = "*"
 twine = "*"
 build = "*"
 pytest-cov = "*"
+coverage = "*"
 
 [requires]
 python_version = "3"
