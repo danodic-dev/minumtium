@@ -1,0 +1,54 @@
+name: unit tests & static code analysis
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+[ab]?'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+          cache: 'pipenv'
+      - name: Install pipenv
+        run: pipx install pipenv
+      - name: Setup Environment
+        run: pipenv install --dev
+      - name: Unit Tests
+        run: pipenv run python -m pytest ./tests/
+  release:
+    needs:
+      - test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+          cache: 'pipenv'
+      - name: Install pipenv
+        run: pipx install pipenv
+      - name: Build
+        run: pipenv run python -m build
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: minumtium ${{ github.ref }}
+          body_path: RELEASE.md
+          draft: false
+          prerelease: false
+      - name: PyPI release
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
