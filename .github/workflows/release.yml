@@ -1,4 +1,4 @@
-name: unit tests & static code analysis
+name: pypi release
 on:
   push:
     tags:
