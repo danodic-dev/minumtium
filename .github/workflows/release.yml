@@ -4,7 +4,7 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+[ab]?'
 jobs:
-  test:
+  test_and_scan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,6 +20,11 @@ jobs:
         run: pipenv install --dev
       - name: Unit Tests
         run: pipenv run python -m pytest ./tests/
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   release:
     needs:
       - test
@@ -47,6 +52,24 @@ jobs:
           body_path: RELEASE.md
           draft: false
           prerelease: false
+      - name: Upload Python Package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/minumtium-*.tar.gz
+          asset_name: Python Package
+          asset_content_type: application/gzip
+      - name: Upload Python Wheel
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/minumtium-*.whl
+          asset_name: Python Wheel
+          asset_content_type: application/x-wheel+zip
       - name: PyPI release
         uses: pypa/gh-action-pypi-publish@release/v1
         with:

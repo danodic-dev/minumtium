@@ -1,4 +1,4 @@
-## minumtium 1.0.0a
+## minumtium 1.0.0
 ### Added
 - Initial release with posts and users.
 - Github actions
