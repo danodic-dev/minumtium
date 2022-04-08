@@ -41,17 +41,6 @@ jobs:
         run: pipx install pipenv
       - name: Build
         run: pipenv run python -m build
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: minumtium ${{ github.ref }}
-          body_path: RELEASE.md
-          draft: false
-          prerelease: false
       - name: Set python package name
         run: echo "PACKAGE_FILENAME=./dist/minumtium-"$(echo $GITHUB_REF | cut -d'v' -f 2)".tar.gz" >> $GITHUB_ENV
       - name: Upload Python Package
@@ -79,3 +68,14 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: minumtium ${{ github.ref }}
+          body_path: RELEASE.md
+          draft: false
+          prerelease: false
