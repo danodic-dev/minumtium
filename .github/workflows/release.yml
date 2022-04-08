@@ -27,7 +27,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   release:
     needs:
-      - test
+      - test_and_scan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
