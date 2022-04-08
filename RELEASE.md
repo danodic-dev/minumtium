@@ -1,3 +1,3 @@
-## minumtium 1.0.1
+## minumtium 1.0.2
 ### Added
-- Added CHANGELOG file.
+- Fix setuptools script.

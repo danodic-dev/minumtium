@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="minumtium",
-    version="1.0.1",
+    version="1.0.2",
     author="Danilo Guimaraes (danodic)",
     author_email="danilo@danodic.dev",
     description="A very simple blogging library.",
@@ -21,7 +21,7 @@ setuptools.setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
-    packages=['minumtium'],
+    packages=setuptools.find_packages(),
     install_requires=['pydantic'],
     python_requires=">=3.6",
 )
