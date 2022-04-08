@@ -44,7 +44,7 @@ class UserRepository:
         """
         try:
             return [User.parse_obj(user) for user in self.db.all()]
-        except DataNotFoundException as e:
+        except DataNotFoundException:
             return []
 
     def get_by_id(self, id: str) -> User:
@@ -94,7 +94,7 @@ class UserRepository:
         try:
             self.get_by_username(username)
             return True
-        except (UsernameMismatchException, NoUserFoundException) as e:
+        except (UsernameMismatchException, NoUserFoundException):
             return False
 
     def delete(self, id) -> None:

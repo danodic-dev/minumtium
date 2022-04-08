@@ -49,8 +49,8 @@ class PostRepository:
         try:
             entry = self.db.find_by_id(id)
             return Post.parse_obj(entry)
-        except:
-            raise PostNotFoundException(id)
+        except Exception as e:
+            raise PostNotFoundException(id) from e
 
     def get_all(self) -> List[Post]:
         """
