@@ -60,7 +60,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ PACKAGE_FILENAME }}
+          asset_path: ${{ env.PACKAGE_FILENAME }}
           asset_name: Python Package
           asset_content_type: application/gzip
       - name: Set python wheel name
@@ -71,7 +71,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ WHEEL_FILENAME }}
+          asset_path: ${{ env.WHEEL_FILENAME }}
           asset_name: Python Wheel
           asset_content_type: application/x-wheel+zip
       - name: PyPI release
