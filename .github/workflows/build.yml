@@ -20,7 +20,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: 'pipenv'
       - name: Install pipenv
-        run: pipx install pipen
+        run: pipx install pipenv
       - name: Setup Environment
         run: pipenv install --dev
       - name: Unit Tests
