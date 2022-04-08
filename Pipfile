@@ -11,6 +11,7 @@ pytest = "*"
 autopep8 = "*"
 twine = "*"
 build = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3"
