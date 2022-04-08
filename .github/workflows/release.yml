@@ -61,7 +61,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ env.PACKAGE_FILENAME }}
-          asset_name: Python Package
+          asset_name: ${{ env.PACKAGE_FILENAME }}
           asset_content_type: application/gzip
       - name: Set python wheel name
         run: echo "WHEEL_FILENAME=./dist/minumtium-"$(echo $GITHUB_REF | cut -d'v' -f 2)"-py3-none-any.whl" >> $GITHUB_ENV
@@ -72,7 +72,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ env.WHEEL_FILENAME }}
-          asset_name: Python Wheel
+          asset_name: ${{ env.WHEEL_FILENAME }}
           asset_content_type: application/x-wheel+zip
       - name: PyPI release
         uses: pypa/gh-action-pypi-publish@release/v1
