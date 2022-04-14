@@ -1,3 +1,3 @@
-## minumtium 1.0.2
+## minumtium 1.0.3
 ### Added
-- Fix setuptools script.
+- Fix type hinting for delete method in database adapter.

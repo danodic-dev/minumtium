@@ -82,7 +82,7 @@ class DatabaseAdapter(ABC):
         """
         raise NotImplementedError()
 
-    def delete(self, id: int) -> None:
+    def delete(self, id: str) -> None:
         """
         Deletes an entity using its id.
         :param id: the id of the entity to be deleted.
