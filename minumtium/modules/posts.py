@@ -57,7 +57,7 @@ class PostRepository:
         Returns all posts stored in the data store.
         :return: a list of Post instances.
         """
-        return [Post.parse_obj(result) for result in self.db.all()]
+        return [Post.parse_obj(result) for result in self.db.all(sort_by='timestamp')]
 
     def get_for_page(self, page: int, count: int = 5) -> List[Post]:
         """
@@ -66,7 +66,7 @@ class PostRepository:
         :param count: the amount of posts to be displayed in the page.
         :return: a list of posts, with at most the count of posts provided and an offset based on the page index.
         """
-        results = self.db.all(limit=count, skip=count * page)
+        results = self.db.all(limit=count, skip=count * page, sort_by='timestamp')
         return [Post.parse_obj(result) for result in results]
 
     def get_summary(self, count: int = 10) -> List[Post]:
@@ -75,7 +75,7 @@ class PostRepository:
         :param count: the amount of posts to be looked for.
         :return: a list of Post instances without body information.
         """
-        results = self.db.summary(['id', 'timestamp', 'title', 'author'], limit=count)
+        results = self.db.summary(['id', 'timestamp', 'title', 'author'], limit=count, sort_by='timestamp')
         return [Post.parse_obj(result) for result in results]
 
     def count(self) -> int:
