@@ -7,18 +7,6 @@ class DatabaseAdapter(ABC):
     An adapter for an arbitrary data store.
     """
 
-    def __init__(self, config: Dict, table_name: str):
-        self.initialize(config, table_name)
-
-    @abstractmethod
-    def initialize(self, config: Dict, table_name: str):
-        """
-        Initializes the database adapter.
-        :param config: a dictionary with configuration entries for the adapter.
-        :param table_name: name of the table/collection used by the adapter implementation.
-        """
-        raise NotImplementedError()
-
     @abstractmethod
     def find_by_id(self, id: str) -> Dict:
         """
