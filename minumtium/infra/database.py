@@ -35,22 +35,24 @@ class DatabaseAdapter(ABC):
         raise NotImplementedError()
 
     @abstractmethod
-    def all(self, limit: int = None, skip: int = None) -> List[Dict]:
+    def all(self, limit: int = None, skip: int = None, sort_by: str = None) -> List[Dict]:
         """
         Returns all items for a given table or document in the database.
         :param limit: maximum amount of items to be returned.
         :param skip: how many results to skip starting at the beginning of the result list.
+        :param sort_by: the column to be used to sort the results (if any).
         :return: a list of dictionaries where each entry represents a value from the database.
         """
         raise NotImplementedError()
 
     @abstractmethod
-    def summary(self, projection: List[str], limit: int = 10) -> List[Dict]:
+    def summary(self, projection: List[str], limit: int = 10, sort_by: str = None) -> List[Dict]:
         """
         Returns a list of the most recent items inserted in the database.
         :param projection: a list of fields to be returned in the result. Other fields from the document/table are going
                            to be ignored.
         :param limit: maximum amount of items to be returned.
+        :param sort_by: the column to be used to sort the results (if any).
         :return: a list of dictionaries where each entry represents a value from the database.
         """
         raise NotImplementedError()

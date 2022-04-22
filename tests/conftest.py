@@ -24,7 +24,7 @@ def users_database_adapter(users_database_data):
         def __init__(self, data: Dict):
             self.data = data
 
-        def all(self):
+        def all(self, sort_by=None):
             return self.data
 
         def find_by_criteria(self, criteria: Dict) -> List[Dict]:
@@ -123,7 +123,7 @@ def posts_database_adapter(posts_database_data: Dict):
         def insert(self, *args, **kwargs) -> str:
             return '0'
 
-        def all(self, limit: int = None, skip: int = None):
+        def all(self, limit: int = None, skip: int = None, sort_by=None):
             if limit is None and skip is None:
                 return self.data
             if limit is None:
@@ -132,7 +132,7 @@ def posts_database_adapter(posts_database_data: Dict):
                 return self.data[:limit]
             return self.data[skip:skip + limit]
 
-        def summary(self, projection: List[str], limit: int = None):
+        def summary(self, projection: List[str], limit: int = None, sort_by=None):
             projected_data = []
             for post in self.data[:limit]:
                 entry = {}
