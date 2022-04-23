@@ -1,4 +1,4 @@
 ## minumtium 1.0.3
 ### Fixed
-- Fix type hinting for delete method in database adapter.
-- Fix build pipeline to run when pushing to branches.
+- Fix setuptools script package scanning.
+- Changed database adapter select methods to have a sort by argument.
