@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="minumtium",
-    version="1.0.3",
+    version="1.0.4",
     author="Danilo Guimaraes (danodic)",
     author_email="danilo@danodic.dev",
     description="A very simple blogging library.",
