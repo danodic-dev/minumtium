@@ -1,20 +1,12 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Dict
 
 
 class AuthenticationAdapter(ABC):
     """
     Adapter for an arbitrary authentication system.
     """
-
-    def __init__(self, config: Dict, user_repo: UserRepository):
-        self.initialize(config, user_repo)
-
-    @abstractmethod
-    def initialize(self, config: Dict, user_repo: UserRepository):
-        ...
 
     @abstractmethod
     def validate_token(self, token: str) -> bool:
