@@ -1,4 +1,5 @@
-## minumtium 1.0.3
-### Fixed
-- Fix setuptools script package scanning.
-- Changed database adapter select methods to have a sort by argument.
+## minumtium 1.0.4
+
+### Changed
+
+- Removed constructor from AuthenticationAdapter, allowing each adapter to define how it is going to be initialized.
