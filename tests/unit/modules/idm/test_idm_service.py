@@ -72,4 +72,4 @@ def idm_service(users_database_adapter) -> IdmService:
                 return 'abc123'
             raise AuthenticationException('Invalid username and/or password.')
 
-    return IdmService(MockAuthAdapter(None, None), UserRepository(users_database_adapter))
+    return IdmService(MockAuthAdapter(), UserRepository(users_database_adapter))
