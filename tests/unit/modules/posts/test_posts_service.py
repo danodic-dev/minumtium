@@ -40,6 +40,14 @@ def test_get_post_invalid_id(service):
         service.get_post(post_id='invalid')
 
 
+def test_get_latest_post(service):
+    post = service.get_latest_post()
+    assert post.id == '0'
+    assert post.title == 'This is the first post'
+    assert post.author == 'danodic'
+    assert post.body == 'This is a sample post.'
+
+
 @pytest.fixture()
 def service(posts_database_adapter) -> PostService:
     repo = PostRepository(posts_database_adapter)

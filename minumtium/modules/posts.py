@@ -162,6 +162,16 @@ class PostService:
             author=author,
             timestamp=datetime.now()))
 
+    def get_latest_post(self):
+        """
+        Finds the most recent post in the repository.
+        :return: the most recent post in the repository.
+        """
+        try:
+            return self.repo.get_for_page(page=0, count=1)[0]
+        except IndexError:
+            raise NoPostsException()
+
 
 class InvalidPageArgumentException(Exception):
     """
@@ -179,3 +189,12 @@ class InvalidCountArgumentException(Exception):
 
     def __init__(self, count: Any):
         super().__init__(f'Invalid count value: {str(count)}')
+
+
+class NoPostsException(Exception):
+    """
+    Raised when there are no posts to be fetched.
+    """
+
+    def __init__(self):
+        super().__init__(f'There are no posts to be fetched.')
