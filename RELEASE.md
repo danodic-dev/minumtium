@@ -1,5 +1,5 @@
-## minumtium 1.0.4
+## minumtium 1.1.0
 
 ### Changed
 
-- Removed constructor from AuthenticationAdapter, allowing each adapter to define how it is going to be initialized.
+- Added method in posts service for fetching the latest post.

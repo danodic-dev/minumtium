@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
+## [1.1.0] - 2022-05-01
+
+### Added
+
+- Added method in posts service for fetching the latest post.
 
 ## [1.0.4] - 2022-04-24
 
